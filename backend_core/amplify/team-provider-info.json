@@ -1,0 +1,32 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-meetingscheduler-staging-162737-authRole",
+      "UnauthRoleArn": "arn:aws:iam::267577069523:role/amplify-meetingscheduler-staging-162737-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::267577069523:role/amplify-meetingscheduler-staging-162737-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-meetingscheduler-staging-162737-deployment",
+      "UnauthRoleName": "amplify-meetingscheduler-staging-162737-unauthRole",
+      "StackName": "amplify-meetingscheduler-staging-162737",
+      "StackId": "arn:aws:cloudformation:eu-west-2:267577069523:stack/amplify-meetingscheduler-staging-162737/4f89fed0-b9e0-11ed-8cbd-02e34c514900",
+      "AmplifyAppId": "d1p201nt49vhkf"
+    },
+    "categories": {
+      "auth": {
+        "MeetingScheduler": {}
+      },
+      "function": {
+        "testBackend": {
+          "deploymentBucketName": "amplify-meetingscheduler-staging-162737-deployment",
+          "s3Key": "amplify-builds/testBackend-4d664c6f54544e665271-build.zip"
+        }
+      },
+      "api": {
+        "MeetingScheduler": {}
+      },
+      "storage": {
+        "s3meetingschedulerstorage1cb97d56": {}
+      }
+    }
+  }
+}

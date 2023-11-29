@@ -1,0 +1,70 @@
+type Membership @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  department: String
+  position: String
+  importance: Int
+  userID: ID! @index(name: "byUser")
+  teamID: ID! @index(name: "byTeam")
+}
+
+type Meeting @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  date: AWSDate!
+  categories: [String]
+  start_time: AWSTime!
+  description: String
+  location: String
+  end_time: AWSTime!
+  teamID: ID! @index(name: "byTeam")
+  users: [User] @manyToMany(relationName: "UserMeeting")
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  email: String!
+  first_name: String!
+  last_name: String!
+  avatar: String
+  meetings: [Meeting] @manyToMany(relationName: "UserMeeting")
+  Memberships: [Membership] @hasMany(indexName: "byUser", fields: ["id"])
+  ScheduledMeetings: [ScheduledMeeting] @manyToMany(relationName: "UserScheduledMeeting")
+  preferred_time_of_day: String
+  importance: Int
+}
+
+type ParticipantUnavailability @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  date: AWSDate,
+  start_time: AWSTime,
+  end_time: AWSTime,
+  userID: ID! @index(name: "byUser")
+}
+
+type Team @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  avatar: String
+  headquarter: String
+  ScheduledMeetings: [ScheduledMeeting] @hasMany(indexName: "byTeam", fields: ["id"])
+  Meetings: [Meeting] @hasMany(indexName: "byTeam", fields: ["id"])
+  Memberships: [Membership] @hasMany(indexName: "byTeam", fields: ["id"])
+}
+
+type ScheduledMeeting @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  earliest_date: String
+  latest_date: AWSDate
+  categories: [String]
+  earliest_start_time: AWSTime
+  teamID: ID! @index(name: "byTeam")
+  users: [User] @manyToMany(relationName: "UserScheduledMeeting")
+  latest_end_time: AWSTime
+  invites_by: AWSDate
+  availableDays: [String]
+  description: String
+}
+ 

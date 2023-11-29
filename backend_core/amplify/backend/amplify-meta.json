@@ -1,0 +1,139 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-meetingscheduler-staging-162737-authRole",
+      "UnauthRoleArn": "arn:aws:iam::267577069523:role/amplify-meetingscheduler-staging-162737-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::267577069523:role/amplify-meetingscheduler-staging-162737-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-meetingscheduler-staging-162737-deployment",
+      "UnauthRoleName": "amplify-meetingscheduler-staging-162737-unauthRole",
+      "StackName": "amplify-meetingscheduler-staging-162737",
+      "StackId": "arn:aws:cloudformation:eu-west-2:267577069523:stack/amplify-meetingscheduler-staging-162737/4f89fed0-b9e0-11ed-8cbd-02e34c514900",
+      "AmplifyAppId": "d1p201nt49vhkf"
+    }
+  },
+  "api": {
+    "MeetingScheduler": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          }
+        },
+        "GraphQLAPIIdOutput": "vg5swodsivcijoy773hlqnxvta",
+        "GraphQLAPIEndpointOutput": "https://o2vkyxr7sjbohnac3marq33xam.appsync-api.eu-west-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-nwy5ueerpfhtzlrdvoxkzto3fa"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-04-01T14:58:44.988Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-meetingscheduler-staging-162737-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiMeetingScheduler"
+      },
+      "lastPushDirHash": "2gUZCFl2wtcfo6fMJr4tLrLOe1E="
+    }
+  },
+  "auth": {
+    "MeetingScheduler": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "signupAttributes": [],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "eu-west-2_3iM7sucHS",
+        "AppClientIDWeb": "2r8bfelc3oa7k0pebejc7alfqu",
+        "AppClientID": "2nc3p00jhu9rtg1edemah441rq",
+        "IdentityPoolId": "eu-west-2:a8ace886-c188-423f-991f-e806a84a32cf",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-2:267577069523:userpool/eu-west-2_3iM7sucHS",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "MeetingScheduler"
+      },
+      "lastPushTimeStamp": "2023-04-01T14:58:37.743Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-meetingscheduler-staging-162737-deployment/amplify-cfn-templates/auth/MeetingScheduler-cloudformation-template.json",
+        "logicalId": "authMeetingScheduler"
+      }
+    }
+  },
+  "function": {
+    "testBackend": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::267577069523:role/meetingschedulerLambdaRole2d941569-staging",
+        "Region": "eu-west-2",
+        "CloudWatchEventRule": "amplify-meetingscheduler-staging-1-CloudWatchEvent-16YP403K3EDKQ",
+        "Arn": "arn:aws:lambda:eu-west-2:267577069523:function:testBackend-staging",
+        "Name": "testBackend-staging",
+        "LambdaExecutionRole": "meetingschedulerLambdaRole2d941569-staging"
+      },
+      "lastPushTimeStamp": "2023-04-01T14:58:44.988Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-meetingscheduler-staging-162737-deployment/amplify-cfn-templates/function/testBackend-cloudformation-template.json",
+        "logicalId": "functiontestBackend"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-meetingscheduler-staging-162737-deployment",
+        "s3Key": "amplify-builds/testBackend-4d664c6f54544e665271-build.zip"
+      },
+      "lastBuildTimeStamp": "2023-04-01T14:52:53.934Z",
+      "lastBuildType": "DEV",
+      "lastPackageTimeStamp": "2023-04-01T14:53:00.451Z",
+      "distZipFilename": "testBackend-4d664c6f54544e665271-build.zip",
+      "lastPushDirHash": "vliNkw6/yZqRd9KZzE8cDbdoc6A=",
+      "lastDevBuildTimeStamp": "2023-04-11T08:43:16.580Z"
+    }
+  },
+  "storage": {
+    "s3meetingschedulerstorage1cb97d56": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "output": {
+        "BucketName": "meetingscheduler-storage-1cb97d56162737-staging",
+        "Region": "eu-west-2"
+      },
+      "lastPushTimeStamp": "2023-04-01T14:58:37.873Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-meetingscheduler-staging-162737-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3meetingschedulerstorage1cb97d56"
+      }
+    }
+  }
+}

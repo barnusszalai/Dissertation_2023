@@ -1,0 +1,897 @@
+
+type Membership @aws_iam @aws_api_key {
+  id: ID!
+  department: String
+  position: String
+  importance: Int
+  userID: ID!
+  teamID: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type Meeting @aws_iam @aws_api_key {
+  id: ID!
+  title: String!
+  date: AWSDate!
+  categories: [String]
+  start_time: AWSTime!
+  description: String
+  location: String
+  end_time: AWSTime!
+  teamID: ID!
+  users(filter: ModelUserMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserMeetingConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type User @aws_iam @aws_api_key {
+  id: ID!
+  username: String!
+  email: String!
+  first_name: String!
+  last_name: String!
+  avatar: String
+  meetings(filter: ModelUserMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserMeetingConnection
+  Memberships(filter: ModelMembershipFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMembershipConnection
+  ScheduledMeetings(filter: ModelUserScheduledMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserScheduledMeetingConnection
+  preferred_time_of_day: String
+  importance: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type ParticipantUnavailability @aws_iam @aws_api_key {
+  id: ID!
+  date: AWSDate
+  start_time: AWSTime
+  end_time: AWSTime
+  userID: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type Team @aws_iam @aws_api_key {
+  id: ID!
+  name: String!
+  description: String
+  avatar: String
+  headquarter: String
+  ScheduledMeetings(filter: ModelScheduledMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelScheduledMeetingConnection
+  Meetings(filter: ModelMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMeetingConnection
+  Memberships(filter: ModelMembershipFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMembershipConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type ScheduledMeeting @aws_iam @aws_api_key {
+  id: ID!
+  title: String
+  earliest_date: String
+  latest_date: AWSDate
+  categories: [String]
+  earliest_start_time: AWSTime
+  teamID: ID!
+  users(filter: ModelUserScheduledMeetingFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserScheduledMeetingConnection
+  latest_end_time: AWSTime
+  invites_by: AWSDate
+  availableDays: [String]
+  description: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type UserMeeting @aws_iam @aws_api_key {
+  id: ID!
+  meetingId: ID!
+  userId: ID!
+  meeting: Meeting!
+  user: User!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+type UserScheduledMeeting @aws_iam @aws_api_key {
+  id: ID!
+  userId: ID!
+  scheduledMeetingId: ID!
+  user: User!
+  scheduledMeeting: ScheduledMeeting!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelMembershipConnection @aws_api_key @aws_iam {
+  items: [Membership]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelMembershipFilterInput {
+  id: ModelIDInput
+  department: ModelStringInput
+  position: ModelStringInput
+  importance: ModelIntInput
+  userID: ModelIDInput
+  teamID: ModelIDInput
+  and: [ModelMembershipFilterInput]
+  or: [ModelMembershipFilterInput]
+  not: ModelMembershipFilterInput
+}
+
+type Query {
+  getMembership(id: ID!): Membership @aws_api_key @aws_iam
+  listMemberships(filter: ModelMembershipFilterInput, limit: Int, nextToken: String): ModelMembershipConnection @aws_api_key @aws_iam
+  syncMemberships(filter: ModelMembershipFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelMembershipConnection @aws_api_key @aws_iam
+  membershipsByUserID(userID: ID!, sortDirection: ModelSortDirection, filter: ModelMembershipFilterInput, limit: Int, nextToken: String): ModelMembershipConnection @aws_api_key @aws_iam
+  membershipsByTeamID(teamID: ID!, sortDirection: ModelSortDirection, filter: ModelMembershipFilterInput, limit: Int, nextToken: String): ModelMembershipConnection @aws_api_key @aws_iam
+  getMeeting(id: ID!): Meeting @aws_api_key @aws_iam
+  listMeetings(filter: ModelMeetingFilterInput, limit: Int, nextToken: String): ModelMeetingConnection @aws_api_key @aws_iam
+  syncMeetings(filter: ModelMeetingFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelMeetingConnection @aws_api_key @aws_iam
+  meetingsByTeamID(teamID: ID!, sortDirection: ModelSortDirection, filter: ModelMeetingFilterInput, limit: Int, nextToken: String): ModelMeetingConnection @aws_api_key @aws_iam
+  getUser(id: ID!): User @aws_api_key @aws_iam
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_api_key @aws_iam
+  syncUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserConnection @aws_api_key @aws_iam
+  getParticipantUnavailability(id: ID!): ParticipantUnavailability @aws_api_key @aws_iam
+  listParticipantUnavailabilities(filter: ModelParticipantUnavailabilityFilterInput, limit: Int, nextToken: String): ModelParticipantUnavailabilityConnection @aws_api_key @aws_iam
+  syncParticipantUnavailabilities(filter: ModelParticipantUnavailabilityFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelParticipantUnavailabilityConnection @aws_api_key @aws_iam
+  participantUnavailabilitiesByUserID(userID: ID!, sortDirection: ModelSortDirection, filter: ModelParticipantUnavailabilityFilterInput, limit: Int, nextToken: String): ModelParticipantUnavailabilityConnection @aws_api_key @aws_iam
+  getTeam(id: ID!): Team @aws_api_key @aws_iam
+  listTeams(filter: ModelTeamFilterInput, limit: Int, nextToken: String): ModelTeamConnection @aws_api_key @aws_iam
+  syncTeams(filter: ModelTeamFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelTeamConnection @aws_api_key @aws_iam
+  getScheduledMeeting(id: ID!): ScheduledMeeting @aws_api_key @aws_iam
+  listScheduledMeetings(filter: ModelScheduledMeetingFilterInput, limit: Int, nextToken: String): ModelScheduledMeetingConnection @aws_api_key @aws_iam
+  syncScheduledMeetings(filter: ModelScheduledMeetingFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelScheduledMeetingConnection @aws_api_key @aws_iam
+  scheduledMeetingsByTeamID(teamID: ID!, sortDirection: ModelSortDirection, filter: ModelScheduledMeetingFilterInput, limit: Int, nextToken: String): ModelScheduledMeetingConnection @aws_api_key @aws_iam
+  getUserMeeting(id: ID!): UserMeeting @aws_api_key @aws_iam
+  listUserMeetings(filter: ModelUserMeetingFilterInput, limit: Int, nextToken: String): ModelUserMeetingConnection @aws_api_key @aws_iam
+  syncUserMeetings(filter: ModelUserMeetingFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserMeetingConnection @aws_api_key @aws_iam
+  userMeetingsByMeetingId(meetingId: ID!, sortDirection: ModelSortDirection, filter: ModelUserMeetingFilterInput, limit: Int, nextToken: String): ModelUserMeetingConnection @aws_api_key @aws_iam
+  userMeetingsByUserId(userId: ID!, sortDirection: ModelSortDirection, filter: ModelUserMeetingFilterInput, limit: Int, nextToken: String): ModelUserMeetingConnection @aws_api_key @aws_iam
+  getUserScheduledMeeting(id: ID!): UserScheduledMeeting @aws_api_key @aws_iam
+  listUserScheduledMeetings(filter: ModelUserScheduledMeetingFilterInput, limit: Int, nextToken: String): ModelUserScheduledMeetingConnection @aws_api_key @aws_iam
+  syncUserScheduledMeetings(filter: ModelUserScheduledMeetingFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelUserScheduledMeetingConnection @aws_api_key @aws_iam
+  userScheduledMeetingsByUserId(userId: ID!, sortDirection: ModelSortDirection, filter: ModelUserScheduledMeetingFilterInput, limit: Int, nextToken: String): ModelUserScheduledMeetingConnection @aws_api_key @aws_iam
+  userScheduledMeetingsByScheduledMeetingId(scheduledMeetingId: ID!, sortDirection: ModelSortDirection, filter: ModelUserScheduledMeetingFilterInput, limit: Int, nextToken: String): ModelUserScheduledMeetingConnection @aws_api_key @aws_iam
+}
+
+input ModelMembershipConditionInput {
+  department: ModelStringInput
+  position: ModelStringInput
+  importance: ModelIntInput
+  userID: ModelIDInput
+  teamID: ModelIDInput
+  and: [ModelMembershipConditionInput]
+  or: [ModelMembershipConditionInput]
+  not: ModelMembershipConditionInput
+}
+
+input CreateMembershipInput {
+  id: ID
+  department: String
+  position: String
+  importance: Int
+  userID: ID!
+  teamID: ID!
+  _version: Int
+}
+
+input UpdateMembershipInput {
+  id: ID!
+  department: String
+  position: String
+  importance: Int
+  userID: ID
+  teamID: ID
+  _version: Int
+}
+
+input DeleteMembershipInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createMembership(input: CreateMembershipInput!, condition: ModelMembershipConditionInput): Membership @aws_api_key @aws_iam
+  updateMembership(input: UpdateMembershipInput!, condition: ModelMembershipConditionInput): Membership @aws_api_key @aws_iam
+  deleteMembership(input: DeleteMembershipInput!, condition: ModelMembershipConditionInput): Membership @aws_api_key @aws_iam
+  createMeeting(input: CreateMeetingInput!, condition: ModelMeetingConditionInput): Meeting @aws_api_key @aws_iam
+  updateMeeting(input: UpdateMeetingInput!, condition: ModelMeetingConditionInput): Meeting @aws_api_key @aws_iam
+  deleteMeeting(input: DeleteMeetingInput!, condition: ModelMeetingConditionInput): Meeting @aws_api_key @aws_iam
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_api_key @aws_iam
+  createParticipantUnavailability(input: CreateParticipantUnavailabilityInput!, condition: ModelParticipantUnavailabilityConditionInput): ParticipantUnavailability @aws_api_key @aws_iam
+  updateParticipantUnavailability(input: UpdateParticipantUnavailabilityInput!, condition: ModelParticipantUnavailabilityConditionInput): ParticipantUnavailability @aws_api_key @aws_iam
+  deleteParticipantUnavailability(input: DeleteParticipantUnavailabilityInput!, condition: ModelParticipantUnavailabilityConditionInput): ParticipantUnavailability @aws_api_key @aws_iam
+  createTeam(input: CreateTeamInput!, condition: ModelTeamConditionInput): Team @aws_api_key @aws_iam
+  updateTeam(input: UpdateTeamInput!, condition: ModelTeamConditionInput): Team @aws_api_key @aws_iam
+  deleteTeam(input: DeleteTeamInput!, condition: ModelTeamConditionInput): Team @aws_api_key @aws_iam
+  createScheduledMeeting(input: CreateScheduledMeetingInput!, condition: ModelScheduledMeetingConditionInput): ScheduledMeeting @aws_api_key @aws_iam
+  updateScheduledMeeting(input: UpdateScheduledMeetingInput!, condition: ModelScheduledMeetingConditionInput): ScheduledMeeting @aws_api_key @aws_iam
+  deleteScheduledMeeting(input: DeleteScheduledMeetingInput!, condition: ModelScheduledMeetingConditionInput): ScheduledMeeting @aws_api_key @aws_iam
+  createUserMeeting(input: CreateUserMeetingInput!, condition: ModelUserMeetingConditionInput): UserMeeting @aws_api_key @aws_iam
+  updateUserMeeting(input: UpdateUserMeetingInput!, condition: ModelUserMeetingConditionInput): UserMeeting @aws_api_key @aws_iam
+  deleteUserMeeting(input: DeleteUserMeetingInput!, condition: ModelUserMeetingConditionInput): UserMeeting @aws_api_key @aws_iam
+  createUserScheduledMeeting(input: CreateUserScheduledMeetingInput!, condition: ModelUserScheduledMeetingConditionInput): UserScheduledMeeting @aws_api_key @aws_iam
+  updateUserScheduledMeeting(input: UpdateUserScheduledMeetingInput!, condition: ModelUserScheduledMeetingConditionInput): UserScheduledMeeting @aws_api_key @aws_iam
+  deleteUserScheduledMeeting(input: DeleteUserScheduledMeetingInput!, condition: ModelUserScheduledMeetingConditionInput): UserScheduledMeeting @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionMembershipFilterInput {
+  id: ModelSubscriptionIDInput
+  department: ModelSubscriptionStringInput
+  position: ModelSubscriptionStringInput
+  importance: ModelSubscriptionIntInput
+  userID: ModelSubscriptionIDInput
+  teamID: ModelSubscriptionIDInput
+  and: [ModelSubscriptionMembershipFilterInput]
+  or: [ModelSubscriptionMembershipFilterInput]
+}
+
+type Subscription {
+  onCreateMembership(filter: ModelSubscriptionMembershipFilterInput): Membership @aws_subscribe(mutations: ["createMembership"]) @aws_api_key @aws_iam
+  onUpdateMembership(filter: ModelSubscriptionMembershipFilterInput): Membership @aws_subscribe(mutations: ["updateMembership"]) @aws_api_key @aws_iam
+  onDeleteMembership(filter: ModelSubscriptionMembershipFilterInput): Membership @aws_subscribe(mutations: ["deleteMembership"]) @aws_api_key @aws_iam
+  onCreateMeeting(filter: ModelSubscriptionMeetingFilterInput): Meeting @aws_subscribe(mutations: ["createMeeting"]) @aws_api_key @aws_iam
+  onUpdateMeeting(filter: ModelSubscriptionMeetingFilterInput): Meeting @aws_subscribe(mutations: ["updateMeeting"]) @aws_api_key @aws_iam
+  onDeleteMeeting(filter: ModelSubscriptionMeetingFilterInput): Meeting @aws_subscribe(mutations: ["deleteMeeting"]) @aws_api_key @aws_iam
+  onCreateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["createUser"]) @aws_api_key @aws_iam
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["updateUser"]) @aws_api_key @aws_iam
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["deleteUser"]) @aws_api_key @aws_iam
+  onCreateParticipantUnavailability(filter: ModelSubscriptionParticipantUnavailabilityFilterInput): ParticipantUnavailability @aws_subscribe(mutations: ["createParticipantUnavailability"]) @aws_api_key @aws_iam
+  onUpdateParticipantUnavailability(filter: ModelSubscriptionParticipantUnavailabilityFilterInput): ParticipantUnavailability @aws_subscribe(mutations: ["updateParticipantUnavailability"]) @aws_api_key @aws_iam
+  onDeleteParticipantUnavailability(filter: ModelSubscriptionParticipantUnavailabilityFilterInput): ParticipantUnavailability @aws_subscribe(mutations: ["deleteParticipantUnavailability"]) @aws_api_key @aws_iam
+  onCreateTeam(filter: ModelSubscriptionTeamFilterInput): Team @aws_subscribe(mutations: ["createTeam"]) @aws_api_key @aws_iam
+  onUpdateTeam(filter: ModelSubscriptionTeamFilterInput): Team @aws_subscribe(mutations: ["updateTeam"]) @aws_api_key @aws_iam
+  onDeleteTeam(filter: ModelSubscriptionTeamFilterInput): Team @aws_subscribe(mutations: ["deleteTeam"]) @aws_api_key @aws_iam
+  onCreateScheduledMeeting(filter: ModelSubscriptionScheduledMeetingFilterInput): ScheduledMeeting @aws_subscribe(mutations: ["createScheduledMeeting"]) @aws_api_key @aws_iam
+  onUpdateScheduledMeeting(filter: ModelSubscriptionScheduledMeetingFilterInput): ScheduledMeeting @aws_subscribe(mutations: ["updateScheduledMeeting"]) @aws_api_key @aws_iam
+  onDeleteScheduledMeeting(filter: ModelSubscriptionScheduledMeetingFilterInput): ScheduledMeeting @aws_subscribe(mutations: ["deleteScheduledMeeting"]) @aws_api_key @aws_iam
+  onCreateUserMeeting(filter: ModelSubscriptionUserMeetingFilterInput): UserMeeting @aws_subscribe(mutations: ["createUserMeeting"]) @aws_api_key @aws_iam
+  onUpdateUserMeeting(filter: ModelSubscriptionUserMeetingFilterInput): UserMeeting @aws_subscribe(mutations: ["updateUserMeeting"]) @aws_api_key @aws_iam
+  onDeleteUserMeeting(filter: ModelSubscriptionUserMeetingFilterInput): UserMeeting @aws_subscribe(mutations: ["deleteUserMeeting"]) @aws_api_key @aws_iam
+  onCreateUserScheduledMeeting(filter: ModelSubscriptionUserScheduledMeetingFilterInput): UserScheduledMeeting @aws_subscribe(mutations: ["createUserScheduledMeeting"]) @aws_api_key @aws_iam
+  onUpdateUserScheduledMeeting(filter: ModelSubscriptionUserScheduledMeetingFilterInput): UserScheduledMeeting @aws_subscribe(mutations: ["updateUserScheduledMeeting"]) @aws_api_key @aws_iam
+  onDeleteUserScheduledMeeting(filter: ModelSubscriptionUserScheduledMeetingFilterInput): UserScheduledMeeting @aws_subscribe(mutations: ["deleteUserScheduledMeeting"]) @aws_api_key @aws_iam
+}
+
+type ModelMeetingConnection @aws_api_key @aws_iam {
+  items: [Meeting]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelMeetingFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  date: ModelStringInput
+  categories: ModelStringInput
+  start_time: ModelStringInput
+  description: ModelStringInput
+  location: ModelStringInput
+  end_time: ModelStringInput
+  teamID: ModelIDInput
+  and: [ModelMeetingFilterInput]
+  or: [ModelMeetingFilterInput]
+  not: ModelMeetingFilterInput
+}
+
+input ModelMeetingConditionInput {
+  title: ModelStringInput
+  date: ModelStringInput
+  categories: ModelStringInput
+  start_time: ModelStringInput
+  description: ModelStringInput
+  location: ModelStringInput
+  end_time: ModelStringInput
+  teamID: ModelIDInput
+  and: [ModelMeetingConditionInput]
+  or: [ModelMeetingConditionInput]
+  not: ModelMeetingConditionInput
+}
+
+input CreateMeetingInput {
+  id: ID
+  title: String!
+  date: AWSDate!
+  categories: [String]
+  start_time: AWSTime!
+  description: String
+  location: String
+  end_time: AWSTime!
+  teamID: ID!
+  _version: Int
+}
+
+input UpdateMeetingInput {
+  id: ID!
+  title: String
+  date: AWSDate
+  categories: [String]
+  start_time: AWSTime
+  description: String
+  location: String
+  end_time: AWSTime
+  teamID: ID
+  _version: Int
+}
+
+input DeleteMeetingInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionMeetingFilterInput {
+  id: ModelSubscriptionIDInput
+  title: ModelSubscriptionStringInput
+  date: ModelSubscriptionStringInput
+  categories: ModelSubscriptionStringInput
+  start_time: ModelSubscriptionStringInput
+  description: ModelSubscriptionStringInput
+  location: ModelSubscriptionStringInput
+  end_time: ModelSubscriptionStringInput
+  teamID: ModelSubscriptionIDInput
+  and: [ModelSubscriptionMeetingFilterInput]
+  or: [ModelSubscriptionMeetingFilterInput]
+}
+
+type ModelUserConnection @aws_api_key @aws_iam {
+  items: [User]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  email: ModelStringInput
+  first_name: ModelStringInput
+  last_name: ModelStringInput
+  avatar: ModelStringInput
+  preferred_time_of_day: ModelStringInput
+  importance: ModelIntInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input ModelUserConditionInput {
+  username: ModelStringInput
+  email: ModelStringInput
+  first_name: ModelStringInput
+  last_name: ModelStringInput
+  avatar: ModelStringInput
+  preferred_time_of_day: ModelStringInput
+  importance: ModelIntInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  email: String!
+  first_name: String!
+  last_name: String!
+  avatar: String
+  preferred_time_of_day: String
+  importance: Int
+  _version: Int
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+  first_name: String
+  last_name: String
+  avatar: String
+  preferred_time_of_day: String
+  importance: Int
+  _version: Int
+}
+
+input DeleteUserInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionUserFilterInput {
+  id: ModelSubscriptionIDInput
+  username: ModelSubscriptionStringInput
+  email: ModelSubscriptionStringInput
+  first_name: ModelSubscriptionStringInput
+  last_name: ModelSubscriptionStringInput
+  avatar: ModelSubscriptionStringInput
+  preferred_time_of_day: ModelSubscriptionStringInput
+  importance: ModelSubscriptionIntInput
+  and: [ModelSubscriptionUserFilterInput]
+  or: [ModelSubscriptionUserFilterInput]
+}
+
+type ModelParticipantUnavailabilityConnection @aws_api_key @aws_iam {
+  items: [ParticipantUnavailability]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelParticipantUnavailabilityFilterInput {
+  id: ModelIDInput
+  date: ModelStringInput
+  start_time: ModelStringInput
+  end_time: ModelStringInput
+  userID: ModelIDInput
+  and: [ModelParticipantUnavailabilityFilterInput]
+  or: [ModelParticipantUnavailabilityFilterInput]
+  not: ModelParticipantUnavailabilityFilterInput
+}
+
+input ModelParticipantUnavailabilityConditionInput {
+  date: ModelStringInput
+  start_time: ModelStringInput
+  end_time: ModelStringInput
+  userID: ModelIDInput
+  and: [ModelParticipantUnavailabilityConditionInput]
+  or: [ModelParticipantUnavailabilityConditionInput]
+  not: ModelParticipantUnavailabilityConditionInput
+}
+
+input CreateParticipantUnavailabilityInput {
+  id: ID
+  date: AWSDate
+  start_time: AWSTime
+  end_time: AWSTime
+  userID: ID!
+  _version: Int
+}
+
+input UpdateParticipantUnavailabilityInput {
+  id: ID!
+  date: AWSDate
+  start_time: AWSTime
+  end_time: AWSTime
+  userID: ID
+  _version: Int
+}
+
+input DeleteParticipantUnavailabilityInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionParticipantUnavailabilityFilterInput {
+  id: ModelSubscriptionIDInput
+  date: ModelSubscriptionStringInput
+  start_time: ModelSubscriptionStringInput
+  end_time: ModelSubscriptionStringInput
+  userID: ModelSubscriptionIDInput
+  and: [ModelSubscriptionParticipantUnavailabilityFilterInput]
+  or: [ModelSubscriptionParticipantUnavailabilityFilterInput]
+}
+
+type ModelTeamConnection @aws_api_key @aws_iam {
+  items: [Team]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelTeamFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  avatar: ModelStringInput
+  headquarter: ModelStringInput
+  and: [ModelTeamFilterInput]
+  or: [ModelTeamFilterInput]
+  not: ModelTeamFilterInput
+}
+
+input ModelTeamConditionInput {
+  name: ModelStringInput
+  description: ModelStringInput
+  avatar: ModelStringInput
+  headquarter: ModelStringInput
+  and: [ModelTeamConditionInput]
+  or: [ModelTeamConditionInput]
+  not: ModelTeamConditionInput
+}
+
+input CreateTeamInput {
+  id: ID
+  name: String!
+  description: String
+  avatar: String
+  headquarter: String
+  _version: Int
+}
+
+input UpdateTeamInput {
+  id: ID!
+  name: String
+  description: String
+  avatar: String
+  headquarter: String
+  _version: Int
+}
+
+input DeleteTeamInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionTeamFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  description: ModelSubscriptionStringInput
+  avatar: ModelSubscriptionStringInput
+  headquarter: ModelSubscriptionStringInput
+  and: [ModelSubscriptionTeamFilterInput]
+  or: [ModelSubscriptionTeamFilterInput]
+}
+
+type ModelScheduledMeetingConnection @aws_iam @aws_api_key {
+  items: [ScheduledMeeting]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelScheduledMeetingFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  earliest_date: ModelStringInput
+  latest_date: ModelStringInput
+  categories: ModelStringInput
+  earliest_start_time: ModelStringInput
+  teamID: ModelIDInput
+  latest_end_time: ModelStringInput
+  invites_by: ModelStringInput
+  availableDays: ModelStringInput
+  description: ModelStringInput
+  and: [ModelScheduledMeetingFilterInput]
+  or: [ModelScheduledMeetingFilterInput]
+  not: ModelScheduledMeetingFilterInput
+}
+
+input ModelScheduledMeetingConditionInput {
+  title: ModelStringInput
+  earliest_date: ModelStringInput
+  latest_date: ModelStringInput
+  categories: ModelStringInput
+  earliest_start_time: ModelStringInput
+  teamID: ModelIDInput
+  latest_end_time: ModelStringInput
+  invites_by: ModelStringInput
+  availableDays: ModelStringInput
+  description: ModelStringInput
+  and: [ModelScheduledMeetingConditionInput]
+  or: [ModelScheduledMeetingConditionInput]
+  not: ModelScheduledMeetingConditionInput
+}
+
+input CreateScheduledMeetingInput {
+  id: ID
+  title: String
+  earliest_date: String
+  latest_date: AWSDate
+  categories: [String]
+  earliest_start_time: AWSTime
+  teamID: ID!
+  latest_end_time: AWSTime
+  invites_by: AWSDate
+  availableDays: [String]
+  description: String
+  _version: Int
+}
+
+input UpdateScheduledMeetingInput {
+  id: ID!
+  title: String
+  earliest_date: String
+  latest_date: AWSDate
+  categories: [String]
+  earliest_start_time: AWSTime
+  teamID: ID
+  latest_end_time: AWSTime
+  invites_by: AWSDate
+  availableDays: [String]
+  description: String
+  _version: Int
+}
+
+input DeleteScheduledMeetingInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionScheduledMeetingFilterInput {
+  id: ModelSubscriptionIDInput
+  title: ModelSubscriptionStringInput
+  earliest_date: ModelSubscriptionStringInput
+  latest_date: ModelSubscriptionStringInput
+  categories: ModelSubscriptionStringInput
+  earliest_start_time: ModelSubscriptionStringInput
+  teamID: ModelSubscriptionIDInput
+  latest_end_time: ModelSubscriptionStringInput
+  invites_by: ModelSubscriptionStringInput
+  availableDays: ModelSubscriptionStringInput
+  description: ModelSubscriptionStringInput
+  and: [ModelSubscriptionScheduledMeetingFilterInput]
+  or: [ModelSubscriptionScheduledMeetingFilterInput]
+}
+
+type ModelUserMeetingConnection @aws_iam @aws_api_key {
+  items: [UserMeeting]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelUserMeetingFilterInput {
+  id: ModelIDInput
+  meetingId: ModelIDInput
+  userId: ModelIDInput
+  and: [ModelUserMeetingFilterInput]
+  or: [ModelUserMeetingFilterInput]
+  not: ModelUserMeetingFilterInput
+}
+
+input ModelUserMeetingConditionInput {
+  meetingId: ModelIDInput
+  userId: ModelIDInput
+  and: [ModelUserMeetingConditionInput]
+  or: [ModelUserMeetingConditionInput]
+  not: ModelUserMeetingConditionInput
+}
+
+input CreateUserMeetingInput {
+  id: ID
+  meetingId: ID!
+  userId: ID!
+  _version: Int
+}
+
+input UpdateUserMeetingInput {
+  id: ID!
+  meetingId: ID
+  userId: ID
+  _version: Int
+}
+
+input DeleteUserMeetingInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionUserMeetingFilterInput {
+  id: ModelSubscriptionIDInput
+  meetingId: ModelSubscriptionIDInput
+  userId: ModelSubscriptionIDInput
+  and: [ModelSubscriptionUserMeetingFilterInput]
+  or: [ModelSubscriptionUserMeetingFilterInput]
+}
+
+type ModelUserScheduledMeetingConnection @aws_iam @aws_api_key {
+  items: [UserScheduledMeeting]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelUserScheduledMeetingFilterInput {
+  id: ModelIDInput
+  userId: ModelIDInput
+  scheduledMeetingId: ModelIDInput
+  and: [ModelUserScheduledMeetingFilterInput]
+  or: [ModelUserScheduledMeetingFilterInput]
+  not: ModelUserScheduledMeetingFilterInput
+}
+
+input ModelUserScheduledMeetingConditionInput {
+  userId: ModelIDInput
+  scheduledMeetingId: ModelIDInput
+  and: [ModelUserScheduledMeetingConditionInput]
+  or: [ModelUserScheduledMeetingConditionInput]
+  not: ModelUserScheduledMeetingConditionInput
+}
+
+input CreateUserScheduledMeetingInput {
+  id: ID
+  userId: ID!
+  scheduledMeetingId: ID!
+  _version: Int
+}
+
+input UpdateUserScheduledMeetingInput {
+  id: ID!
+  userId: ID
+  scheduledMeetingId: ID
+  _version: Int
+}
+
+input DeleteUserScheduledMeetingInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionUserScheduledMeetingFilterInput {
+  id: ModelSubscriptionIDInput
+  userId: ModelSubscriptionIDInput
+  scheduledMeetingId: ModelSubscriptionIDInput
+  and: [ModelSubscriptionUserScheduledMeetingFilterInput]
+  or: [ModelSubscriptionUserScheduledMeetingFilterInput]
+}
+
