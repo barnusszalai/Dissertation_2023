@@ -1,6 +1,8 @@
 Barnabas Szalai 6CCS3PRJ Final Project
 
 Invitely
+A meeting scheduling system that allows users to form teams and generate meeting slots in an efficient way. The organizer can invite participants and set broad constraints and priorities. The system than looks at all the meetings to be scheduled, and generates the slots by optimizing the global maximum. Please refer to the 'Dissertation Report' for full functionality description.
+
 
 This folder contains all parts of the software system, except the source code of the cloud software (AWS).
 
