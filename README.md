@@ -11,7 +11,7 @@ Please refer to the PDF report for full functionality description.
 
 Deployed-Django:
 
-Must be deployed to a cloud server (like Heroku) for the API to function.
+- Must be deployed to a cloud server (like Heroku) for the API to function.
 
 Web Demo:
 
