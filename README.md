@@ -6,16 +6,11 @@ This folder contains all parts of the software system, except the source code of
 
 The three sub-folders contain the source code for the three different parts of the application.
 
+Please refer to the PDF report for full functionality description.
+
 1. Deployed-Django
 
-The Django project, which contains the algorithm for the meeting scheduler is hosted on Heroku:
-https://prj-backend.herokuapp.com/
-
-As it is only an API, there will be nothing shown on the front-end of the url.
-
-The other parts of the application are connected to it; therefore, it is not required to start this project.
-
-However, the rest of the components are not deployed; therefore, I provided the instructions to use them below:
+Must be deployed to a cloud server (like Heroku) for the API to function.
 
 Web Demo:
 
@@ -30,8 +25,3 @@ Meeting Scheduler:
 - Install the required dependencies (npm install)
 - Start the server (npm start)
 - Open the app with the simulator, or scan the QR code with the Expo Go App
-
-Amplify:
-
-- Run 'amplify mock function testBackend' to generate the schedules
-- Once the app gets deployed, this function will be automatically called every day to generate the schedules
