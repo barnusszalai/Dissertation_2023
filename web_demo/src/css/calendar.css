@@ -1,0 +1,67 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .participant-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .calendar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 0 10px;
+    background-color: #f9f9f9;
+  }
+
+  .hour-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  .hour-block-divide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    position: relative; /* Add this line */
+  }
+  
+  .hour-block-divide::before,
+  .hour-block-divide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+  }
+
+  .hour-block-divide::before {
+    left: 0;
+    background-color: #f00; /* Change the color to your desired left side color */
+  }
+
+  .hour-block-divide::after {
+    right: 0;
+    background-color: #0f0; /* Change the color to your desired right side color */
+  }
+  

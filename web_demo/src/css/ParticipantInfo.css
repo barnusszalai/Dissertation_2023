@@ -1,0 +1,99 @@
+.participant-info {
+    font-size: 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    margin: 0 auto;
+    margin-left: 30px;
+    padding: 1rem;
+  }
+  
+  .participant-info__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .participant-info__icon {
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .participant-info__title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .participant-info__body {
+    margin: 1rem 0;
+  }
+  
+  .participant-info__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .participant-info__field-icon {
+    font-size: 1.2rem;
+    color: #333;
+    margin-right: 0.5rem;
+  }
+  
+  .participant-info__label {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .participant-info__input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    flex: 1;
+  }
+  
+  .participant-info__checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 1.2rem;
+  }
+  
+  .participant-info__checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .participant-info__checkbox {
+    margin-right: 0.5rem;
+  }
+  
+  .participant-info__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+  
+  .participant-info__button {
+    border: none;
+    background-color: #008cba;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .participant-info__button:hover {
+    background-color: #005b85;
+  }
+  
