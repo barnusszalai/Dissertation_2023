@@ -8,7 +8,7 @@ The three sub-folders contain the source code for the three different parts of t
 
 Please refer to the PDF report for full functionality description.
 
-1. Deployed-Django
+Deployed-Django:
 
 Must be deployed to a cloud server (like Heroku) for the API to function.
 
